@@ -9,6 +9,10 @@ also_reload('lib/**/*.rb')
 require 'pry'
 require 'thin'
 
+after do ()
+	ActiveRecord::Base.clear_active_connections!
+end
+
 
 ##########################
 ####___Index-Entry___#####
@@ -123,9 +127,12 @@ end
 
 post("/surveys/:survey_id/questions/:id") do
 	value = params.fetch("value")
+	@survey_id = params.fetch("survey_id").to_i()
+	@survey = Survey.find(@survey_id)
 	@question_id = params.fetch("id").to_i()
 	@question = Question.find(@question_id)
 	@question.update({:value => value})
-	# erb(:question)
-	redirect "/surveys/#{@survey.id()}/questions/#{@question.id()}"
+	@survey = Survey.find(params.fetch("survey_id").to_i())
+	@question = Question.find(params.fetch("id").to_i())
+	erb(:question)
 end
