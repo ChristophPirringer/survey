@@ -102,7 +102,7 @@ end
 get("/surveys/:survey_id/questions/:id") do
 	@survey = Survey.find(params.fetch("survey_id").to_i())
 	@question = Question.find(params.fetch("id").to_i())
-	erb(:employee)
+	erb(:question)
 end
 
 delete '/surveys/:survey_id/questions/:id' do
@@ -119,4 +119,13 @@ patch '/surveys/:survey_id/questions/:id' do
 	@question.update({name: params['name']})
 	@questions = Question.all()
 	redirect "/surveys/#{@survey.id()}"
+end
+
+post("/surveys/:survey_id/questions/:id") do
+	value = params.fetch("value")
+	@question_id = params.fetch("id").to_i()
+	@question = Question.find(@question_id)
+	@question.update({:value => value})
+	# erb(:question)
+	redirect "/surveys/#{@survey.id()}/questions/#{@question.id()}"
 end

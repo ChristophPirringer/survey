@@ -1,0 +1,43 @@
+<h1><%= @question.name() %></h1>
+
+<h3>On a scale from 1 to 10, how do you feel about <%= @question.name() %> (10 being the most positive)?</h3>
+
+<h4>Your last answer was: <%= @question.value() %></h4>
+
+<form action="/surveys/<%= @survey.id %>" id="question_form">
+  <select name="value" form="carform">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+  </select>
+  <input type="submit">
+</form>
+
+  <form action="/surveys/<%= @survey.id %>/questions/<%= @question.id %>" method="post">
+    <input name="_method" type="hidden" value="patch">
+    <label for="name">Rename the question:</label>
+    <input id="name" name="name" type="text">
+
+    <button type="submit">Update</button>
+  </form>
+
+<br>
+
+<form action="/surveys/<%= @survey.id %>/questions/<%= @question.id %>" method="post">
+  <input name="_method" type="hidden" value="delete">
+
+  <button type="submit">Delete Employee</button>
+</form>
+
+<div class="container">
+	<a href="/">Home</a>
+	<a href="/surveys">View All Divisions</a>
+	<a href="/surveys/new">Add New Division</a>
+</div>
