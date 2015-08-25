@@ -1,0 +1,18 @@
+
+<h1>Your Current Surveys</h1>
+
+<% if @surveys.any? %>
+	<h3>Here are your surveys:</h3>
+
+	<ul>
+		<% @surveys.each do |survey| %>
+		<li><a href="/surveys/<%= survey.id() %>"><%= survey.name() %></a></li>
+		<% end %>
+	</ul>
+
+<% else %>
+		<p>There are no surveys yet!</p>
+<% end %>
+
+<a href="/clear">Clear all surveys!</a>
+<a href="/">Go Away!</a>

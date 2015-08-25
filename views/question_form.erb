@@ -1,0 +1,11 @@
+<h1>Please add a question to the survey:</h1>
+
+<form action="/surveys/<%= @survey %>/questions" method ="post">
+	<div class="form-group">
+		<label for="name">Please add the title of the question:</label>
+
+		<input for="name" name="name">
+	</div>
+	<button type="submit" class="btn btn-danger">Submit</button>
+
+</form>
